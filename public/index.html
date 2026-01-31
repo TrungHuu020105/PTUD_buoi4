@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog MVP</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <h1>📝 Blog MVP</h1>
+      <nav class="nav">
+        <button class="nav-btn active" data-view="home">Trang chủ</button>
+        <button class="nav-btn" data-view="write">Viết bài</button>
+        <button class="nav-btn" data-view="manage">Quản lý</button>
+      </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Home View - Danh sách bài viết -->
+      <section id="home-view" class="view active">
+        <h2>Bài viết mới nhất</h2>
+        <div id="posts-list" class="posts-list">
+          <!-- Posts will be loaded here -->
+        </div>
+      </section>
+
+      <!-- Write View - Viết bài mới -->
+      <section id="write-view" class="view">
+        <h2>Viết bài mới</h2>
+        <form id="post-form" class="post-form">
+          <input type="hidden" id="post-id">
+          <div class="form-group">
+            <label for="post-title">Tiêu đề</label>
+            <input type="text" id="post-title" placeholder="Nhập tiêu đề bài viết..." required>
+          </div>
+          <div class="form-group">
+            <label for="post-author">Tác giả</label>
+            <input type="text" id="post-author" placeholder="Tên của bạn..." required>
+          </div>
+          <div class="form-group">
+            <label for="post-content">Nội dung</label>
+            <textarea id="post-content" rows="10" placeholder="Viết nội dung bài viết..." required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="post-status">Trạng thái</label>
+            <select id="post-status">
+              <option value="published">Xuất bản</option>
+              <option value="draft">Bản nháp</option>
+              <option value="hidden">Ẩn</option>
+            </select>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Đăng bài</button>
+            <button type="button" class="btn btn-secondary" id="cancel-edit">Hủy</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Manage View - Quản lý bài viết -->
+      <section id="manage-view" class="view">
+        <h2>Quản lý bài viết</h2>
+        <div class="filter-bar">
+          <button class="filter-btn active" data-filter="all">Tất cả</button>
+          <button class="filter-btn" data-filter="published">Đã xuất bản</button>
+          <button class="filter-btn" data-filter="draft">Bản nháp</button>
+          <button class="filter-btn" data-filter="hidden">Đã ẩn</button>
+        </div>
+        <div id="manage-posts-list" class="posts-list manage-list">
+          <!-- Posts will be loaded here -->
+        </div>
+      </section>
+
+      <!-- Post Detail View -->
+      <section id="post-detail-view" class="view">
+        <button class="btn btn-back" id="back-btn">← Quay lại</button>
+        <article id="post-detail" class="post-detail">
+          <!-- Post detail will be loaded here -->
+        </article>
+        
+        <!-- Comments Section -->
+        <section class="comments-section">
+          <h3>Bình luận</h3>
+          <form id="comment-form" class="comment-form">
+            <input type="hidden" id="comment-post-id">
+            <div class="form-group">
+              <input type="text" id="comment-author" placeholder="Tên của bạn..." required>
+            </div>
+            <div class="form-group">
+              <textarea id="comment-content" rows="3" placeholder="Viết bình luận..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Gửi bình luận</button>
+          </form>
+          <div id="comments-list" class="comments-list">
+            <!-- Comments will be loaded here -->
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 Blog MVP - Phát triển ứng dụng web</p>
+    </footer>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
