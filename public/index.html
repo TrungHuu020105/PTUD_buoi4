@@ -10,16 +10,72 @@
   <div class="container">
     <!-- Header -->
     <header class="header">
-      <h1>📝 Blog MVP</h1>
-      <nav class="nav">
+      <div class="header-top">
+        <h1>📝 Blog MVP</h1>
+        <div id="user-area" class="user-area">
+          <!-- User info or login buttons will be here -->
+        </div>
+      </div>
+      <nav class="nav" id="main-nav">
         <button class="nav-btn active" data-view="home">Trang chủ</button>
-        <button class="nav-btn" data-view="write">Viết bài</button>
-        <button class="nav-btn" data-view="manage">Quản lý</button>
+        <button class="nav-btn auth-required" data-view="write" style="display:none;">Viết bài</button>
+        <button class="nav-btn auth-required" data-view="manage" style="display:none;">Quản lý bài</button>
+        <button class="nav-btn admin-required" data-view="admin" style="display:none;">👑 Admin</button>
       </nav>
     </header>
 
     <!-- Main Content -->
     <main class="main-content">
+      <!-- Login View -->
+      <section id="login-view" class="view">
+        <h2>Đăng nhập</h2>
+        <form id="login-form" class="auth-form">
+          <div class="form-group">
+            <label for="login-username">Tên đăng nhập hoặc Email</label>
+            <input type="text" id="login-username" placeholder="Nhập tên đăng nhập..." required>
+          </div>
+          <div class="form-group">
+            <label for="login-password">Mật khẩu</label>
+            <input type="password" id="login-password" placeholder="Nhập mật khẩu..." required>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+          </div>
+          <p class="auth-switch">Chưa có tài khoản? <a href="#" id="show-register">Đăng ký ngay</a></p>
+        </form>
+      </section>
+
+      <!-- Register View -->
+      <section id="register-view" class="view">
+        <h2>Đăng ký tài khoản</h2>
+        <form id="register-form" class="auth-form">
+          <div class="form-group">
+            <label for="reg-username">Tên đăng nhập</label>
+            <input type="text" id="reg-username" placeholder="Nhập tên đăng nhập..." required>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email</label>
+            <input type="email" id="reg-email" placeholder="Nhập email..." required>
+          </div>
+          <div class="form-group">
+            <label for="reg-displayname">Tên hiển thị</label>
+            <input type="text" id="reg-displayname" placeholder="Tên sẽ hiển thị trên blog..." required>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Mật khẩu</label>
+            <input type="password" id="reg-password" placeholder="Nhập mật khẩu..." required>
+          </div>
+          <div class="form-group">
+            <label for="reg-confirm-password">Xác nhận mật khẩu</label>
+            <input type="password" id="reg-confirm-password" placeholder="Nhập lại mật khẩu..." required>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Đăng ký</button>
+          </div>
+          <p class="auth-switch">Đã có tài khoản? <a href="#" id="show-login">Đăng nhập</a></p>
+        </form>
+      </section>
+
       <!-- Home View - Danh sách bài viết -->
       <section id="home-view" class="view active">
         <h2>Bài viết mới nhất</h2>
@@ -36,10 +92,6 @@
           <div class="form-group">
             <label for="post-title">Tiêu đề</label>
             <input type="text" id="post-title" placeholder="Nhập tiêu đề bài viết..." required>
-          </div>
-          <div class="form-group">
-            <label for="post-author">Tác giả</label>
-            <input type="text" id="post-author" placeholder="Tên của bạn..." required>
           </div>
           <div class="form-group">
             <label for="post-content">Nội dung</label>
@@ -84,20 +136,45 @@
         <!-- Comments Section -->
         <section class="comments-section">
           <h3>Bình luận</h3>
-          <form id="comment-form" class="comment-form">
-            <input type="hidden" id="comment-post-id">
-            <div class="form-group">
-              <input type="text" id="comment-author" placeholder="Tên của bạn..." required>
-            </div>
-            <div class="form-group">
-              <textarea id="comment-content" rows="3" placeholder="Viết bình luận..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Gửi bình luận</button>
-          </form>
+          <div id="comment-form-container">
+            <!-- Comment form will be here if logged in -->
+          </div>
           <div id="comments-list" class="comments-list">
             <!-- Comments will be loaded here -->
           </div>
         </section>
+      </section>
+
+      <!-- Admin View -->
+      <section id="admin-view" class="view">
+        <h2>👑 Bảng điều khiển Admin</h2>
+        
+        <!-- Stats Cards -->
+        <div class="stats-grid" id="stats-grid">
+          <!-- Stats will be loaded here -->
+        </div>
+        
+        <!-- Admin Tabs -->
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-tab="users">Quản lý người dùng</button>
+          <button class="admin-tab" data-tab="all-posts">Tất cả bài viết</button>
+        </div>
+        
+        <!-- Users Management -->
+        <div id="admin-users-tab" class="admin-tab-content active">
+          <h3>Danh sách người dùng</h3>
+          <div id="users-list" class="users-list">
+            <!-- Users will be loaded here -->
+          </div>
+        </div>
+        
+        <!-- All Posts Management -->
+        <div id="admin-all-posts-tab" class="admin-tab-content">
+          <h3>Tất cả bài viết</h3>
+          <div id="admin-posts-list" class="posts-list manage-list">
+            <!-- Posts will be loaded here -->
+          </div>
+        </div>
       </section>
     </main>
 
